@@ -1,0 +1,69 @@
+<?php
+
+namespace Pils36\Rexpay\Http;
+
+use \Pils36\Rexpay\Contracts\RouteInterface;
+use \Pils36\Rexpay\Helpers\Router;
+use \Pils36\Rexpay;
+
+class RequestBuilder
+{
+    protected $rexpayObj;
+    protected $interface;
+    protected $request;
+
+    public $payload = [ ];
+    public $sentargs = [ ];
+
+    public function __construct($rexpayObj, $interface, array $payload = [ ], array $sentargs = [ ])
+    {
+        $this->request = new Request($rexpayObj);
+        $this->rexpayObj = $rexpayObj;
+        $this->interface = $interface;
+        $this->payload = $payload;
+        $this->sentargs = $sentargs;
+    }
+
+    public function build()
+    {
+        $this->request->headers["User-Agent"] = "Rexpay/v1 PhpBindings/" . Rexpay::VERSION;
+        $this->request->endpoint = Router::REXPAY_API_ROOT . $this->interface[RouteInterface::ENDPOINT_KEY];
+        $this->request->method = $this->interface[RouteInterface::METHOD_KEY];
+        $this->moveArgsToSentargs();
+        $this->putArgsIntoEndpoint($this->request->endpoint);
+        $this->packagePayload();
+        return $this->request;
+    }
+
+    public function packagePayload()
+    {
+        if (is_array($this->payload) && count($this->payload)) {
+            if ($this->request->method === RouteInterface::GET_METHOD) {
+                $this->request->endpoint = $this->request->endpoint . '?' . http_build_query($this->payload);
+            } else {
+                $this->request->body = json_encode($this->payload);
+            }
+        }
+    }
+
+    public function putArgsIntoEndpoint(&$endpoint)
+    {
+        foreach ($this->sentargs as $key => $value) {
+            $endpoint = str_replace('{' . $key . '}', $value, $endpoint);
+        }
+    }
+
+    public function moveArgsToSentargs()
+    {
+        if (!array_key_exists(RouteInterface::ARGS_KEY, $this->interface)) {
+            return;
+        }
+        $args = $this->interface[RouteInterface::ARGS_KEY];
+        foreach ($this->payload as $key => $value) {
+            if (in_array($key, $args)) {
+                $this->sentargs[$key] = $value;
+                unset($this->payload[$key]);
+            }
+        }
+    }
+}
