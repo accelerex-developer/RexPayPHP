@@ -6,25 +6,25 @@ use Pils36\Rexpay\Helpers\Router;
 use Pils36\Rexpay\Test\Mock\CustomRoute;
 use \Pils36\Rexpay\Exception\ValidationException;
 
-class WayapayTest extends \PHPUnit_Framework_TestCase
+class RexpayTest extends \PHPUnit_Framework_TestCase
 {
 
 
     public function testVersion()
     {
-        $this->assertEquals("2.1.19", Wayapay::VERSION);
+        $this->assertEquals("2.1.19", Rexpay::VERSION);
     }
 
     public function testDisableFileGetContentsFallback()
     {
-        Wayapay::disableFileGetContentsFallback();
-        $this->assertFalse(Wayapay::$fallback_to_file_get_contents);
+        Rexpay::disableFileGetContentsFallback();
+        $this->assertFalse(Rexpay::$fallback_to_file_get_contents);
     }
 
     public function testEnableFileGetContentsFallback()
     {
-        Wayapay::enableFileGetContentsFallback();
-        $this->assertTrue(Wayapay::$fallback_to_file_get_contents);
+        Rexpay::enableFileGetContentsFallback();
+        $this->assertTrue(Rexpay::$fallback_to_file_get_contents);
     }
 
 
@@ -91,7 +91,7 @@ class WayapayTest extends \PHPUnit_Framework_TestCase
 
     public function testUseRoutesWithInvalidParams2()
     {
-        $custom_routes = ['custom_route' => Wayapay::class];
+        $custom_routes = ['custom_route' => Rexpay::class];
         $r = new Rexpay('REXSECK_');
         $this->expectException(\InvalidArgumentException::class);
         $r->useRoutes($custom_routes);
