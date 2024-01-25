@@ -63,7 +63,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
             $resp = $r->wrapUp();
         } catch (\Exception $e) {
             $this->assertInstanceOf(ApiException::class, $e);
-            $this->assertEquals("Wayapay Request failed with response: 'I failed on Api'", $e->getMessage());
+            $this->assertEquals("Rexpay Request failed with response: 'I failed on Api'", $e->getMessage());
         }
     }
 
@@ -78,7 +78,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
             $resp = $r->wrapUp();
         } catch (\Exception $e) {
             $this->assertInstanceOf(ApiException::class, $e);
-            $expectedResponse = "Wayapay Request failed with response: '{\"errors\":\"I failed on Api\"}'";
+            $expectedResponse = "Rexpay Request failed with response: '{\"errors\":\"I failed on Api\"}'";
             $this->assertEquals($expectedResponse, $e->getMessage());
         }
     }

@@ -103,8 +103,8 @@ class Rexpay
         return new Router($name, $this);
     }
 
-    public function authorizationUrl($mode = 'live'){
-        $uri = $mode == 'live' ? 'https://pay.wayapay.ng?_tranId=' : 'https://pay.staging.wayapay.ng?_tranId=';
+    public function authorizationUrl(){
+        $uri = 'https://pgs-sandbox.globalaccelerex.com/api/cps/v1/getTransactionStatus?transactionReference=';
 
         return $uri;
     }

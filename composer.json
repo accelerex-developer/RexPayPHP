@@ -1,6 +1,6 @@
 {
-    "name": "pils36/wayapay-php",
-    "description": "Helps make your Wayapay api calls with PHP.",
+    "name": "pils36/rexpay",
+    "description": "Helps make your Rexpay api calls with PHP.",
     "type": "library",
     "license": "MIT",
     "authors": [

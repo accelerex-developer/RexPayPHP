@@ -53,14 +53,12 @@ Initialize a transaction by calling our API.
     {
 
       $tranx = $rexpay->transaction->initialize([
-        'amount'=>"128.00",     // string   
-        'description'=>"Order for something", // string
-        'currency'=>566, // int
-        'fee'=>1, // int
-        'customer'=> ['name' => "Like Vincent", 'email' => "wakexow@mailinator.com", 'phoneNumber' => "+11948667447"], // array
-        'merchantId'=>"MER_qZaVZ1645265780823HOaZW", // string
-        'rexPublicKey'=>"REXPUBK_TEST_0x3442f06c8fa6454e90c5b1a518758c70", // string
-        'mode'=>"test" // string: \\test or live
+        'reference'=>"sm23oyr1122",     // string   
+        'amount'=>2.00,     // double   
+        'currency'=>"NGN",     // string   
+        'userId'=>"awoyeyetimilehin@gmail.com",     // string   
+        'callbackUrl'=>"google.com",     // string   
+        'metadata'=> ['email' => "awoyeyetimilehin@gmail.com", 'customerName' => "Victor Musa"] // array
       ]);
     } catch(\Pils36\Rexpay\Exception\ApiException $e){
       print_r($e->getResponseObject());
@@ -73,7 +71,7 @@ Initialize a transaction by calling our API.
 
 
     // Get Authorization URL to make payment to the Rexpay payment gateway environment
-    $uri = $rexpay->authorizationUrl('test');  // change to live for production
+    $uri = $rexpay->authorizationUrl();  // change to live for production
 
     // Use the authorization url to
     $authorization_url = $uri.$tranx->data->tranId;
@@ -92,7 +90,7 @@ Before you give value to the customer, please make a server-side call to our ver
 After we redirect to your callback url, please verify the transaction before giving value.
 
 ```php
-    $transactionId = isset($_GET['_tranId']) ? $_GET['_tranId'] : '';
+    $transactionId = isset($_GET['transactionReference']) ? $_GET['transactionReference'] : '';
     if(!$transactionId){
       die('No transaction id provided');
     }
@@ -103,8 +101,7 @@ After we redirect to your callback url, please verify the transaction before giv
     {
       // verify using the library
       $tranx = $rexpay->transaction->verify([
-        '_tranId'=>$transactionId, // unique to transactions
-        'mode'=>'test', // test or live
+        'transactionReference'=>$transactionId // unique to transactions
       ]);
     } catch(\Pils36\Rexpay\Exception\ApiException $e){
       print_r($e->getResponseObject());

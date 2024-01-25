@@ -14,18 +14,18 @@ class Transaction implements RouteInterface
 
     public static function initialize()
     {
+        var_dump(1234);
         return [
             RouteInterface::METHOD_KEY => RouteInterface::POST_METHOD,
-            RouteInterface::ENDPOINT_KEY => Transaction::root() . '/request/transaction',
+            RouteInterface::ENDPOINT_KEY => Transaction::root() . '/payment/v2/createPayment',
             RouteInterface::PARAMS_KEY => [
+                'reference',
                 'amount',
-                'description',
                 'currency',
-                'fee',
-                'customer',
-                'merchantId',
-                'wayaPublicKey',
-                'mode',
+                'userId',
+                'callbackUrl',
+                'metadata',
+                'mode'
             ],
         ];
     }
@@ -120,8 +120,8 @@ class Transaction implements RouteInterface
     {
         return [
             RouteInterface::METHOD_KEY => RouteInterface::GET_METHOD,
-            RouteInterface::ENDPOINT_KEY => Transaction::root() . '/reference/query/{_tranId}?mode={mode}',
-            RouteInterface::ARGS_KEY => ['_tranId', 'mode'],
+            RouteInterface::ENDPOINT_KEY => Transaction::root() . '/getTransactionStatus?transactionReference={transactionReference}',
+            RouteInterface::ARGS_KEY => ['transactionReference'],
         ];
     }
 

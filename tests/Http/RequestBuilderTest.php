@@ -35,13 +35,13 @@ class RequestBuilderTest extends \PHPUnit_Framework_TestCase
     public function testBuild()
     {
         $p = new Rexpay('REXSECK_');
-        $params = ['amount'=>'120.00', 'description'=>'some description', 'currency'=> 566, 'fee'=>1, 'customer'=>['name'=>'Luke Vincent', 'email'=>'wakexow@mailinator.com', 'phoneNumber'=>'+11948667447'], 'merchantId'=>'MER_qZaVZ1645265780823HOaZW', 'wayaPublicKey'=>'WAYAPUBK_TEST_0x3442f06c8fa6454e90c5b1a518758c70', 'mode' => 'test'];
+        $params = ['reference' => 'sm23oyr1122', 'amount'=>2.00, 'currency'=>'NGN', 'userId'=> 'awoyeyetimilehin@gmail.com', 'callbackUrl'=>'google.com', 'metadata'=>['email' => "awoyeyetimilehin@gmail.com", 'customerName' => "Victor Musa"], 'mode' => 'test'];
         $rb = new RequestBuilder($p, Transaction::initialize(), $params);
 
         $r = $rb->build();
 
 
-        $this->assertEquals('https://pgs-sandbox.globalaccelerex.com/api/cps/v1/request/transaction', $r->endpoint);
+        $this->assertEquals('https://pgs-sandbox.globalaccelerex.com/api/cps/v1/payment/v2/createPayment', $r->endpoint);
         $this->assertEquals('post', $r->method);
         $this->assertEquals(json_encode($params), $r->body);
 
@@ -52,17 +52,17 @@ class RequestBuilderTest extends \PHPUnit_Framework_TestCase
         $r = $rb->build();
 
 
-        $this->assertEquals('https://services.staging.wayapay.ng/payment-gateway/api/v1/request?perPage=10', $r->endpoint);
+        $this->assertEquals('https://pgs-sandbox.globalaccelerex.com/api/cps/v1/request?perPage=10', $r->endpoint);
         $this->assertEquals('get', $r->method);
         $this->assertEmpty($r->body);
 
-        $args = ['_tranId'=>'12345678', 'mode' => 'test'];
+        $args = ['transactionReference'=> 'sm23oyr1122'];
         $rb = new RequestBuilder($p, Transaction::verify(), [], $args);
 
         $r = $rb->build();
 
 
-        $this->assertEquals('https://pgs-sandbox.globalaccelerex.com/api/cps/v1/reference/query/12345678?mode=test', $r->endpoint);
+        $this->assertEquals('https://pgs-sandbox.globalaccelerex.com/api/cps/v1/getTransactionStatus?transactionReference=sm23oyr1122', $r->endpoint);
         $this->assertEquals('get', $r->method);
         $this->assertEmpty($r->body);
     }
