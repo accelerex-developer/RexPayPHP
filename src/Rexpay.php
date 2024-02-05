@@ -4,7 +4,6 @@ namespace Pils36;
 
 use \Pils36\Rexpay\Helpers\Router;
 use \Pils36\Rexpay\Contracts\RouteInterface;
-use \Pils36\Rexpay\Exception\ValidationException;
 
 class Rexpay
 {
