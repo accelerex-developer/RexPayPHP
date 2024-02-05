@@ -119,23 +119,9 @@ class Request
     public function attemptCurl()
     {
 
-
-        $endpoint = $this->endpoint;
-
-        // if (isset(json_decode($this->body)->mode)) {
-        //     if (json_decode($this->body)->mode == 'test') {
-        //         $endpoint = $this->endpoint;
-        //     } else {
-        //         $endpoint = str_replace('https://pgs-sandbox.globalaccelerex.com/api/cps/v1', 'https://pgs-sandbox.globalaccelerex.com/api/cps/v1', $this->endpoint);
-        //     }
-        // }
-        // elseif(explode("?mode=", $endpoint)[1] == 'live'){
-        //     $endpoint = str_replace('https://pgs-sandbox.globalaccelerex.com/api/cps/v1', 'https://pgs-sandbox.globalaccelerex.com/api/cps/v1', $this->endpoint);
-        // }
-
         //open connection
         $ch = \curl_init();
-        \curl_setopt($ch, \CURLOPT_URL, $endpoint);
+        \curl_setopt($ch, \CURLOPT_URL, $this->endpoint);
         ($this->method === RouteInterface::POST_METHOD) && \curl_setopt($ch, \CURLOPT_POST, true);
         ($this->method === RouteInterface::PUT_METHOD) && \curl_setopt($ch, \CURLOPT_CUSTOMREQUEST, 'PUT');
 
