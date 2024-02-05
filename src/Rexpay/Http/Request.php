@@ -119,7 +119,7 @@ class Request
     public function attemptCurl()
     {
 
-        //open connection
+        //open connection attempt
         $ch = \curl_init();
         \curl_setopt($ch, \CURLOPT_URL, $this->endpoint);
         ($this->method === RouteInterface::POST_METHOD) && \curl_setopt($ch, \CURLOPT_POST, true);
