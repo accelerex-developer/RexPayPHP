@@ -122,16 +122,16 @@ class Request
 
         $endpoint = $this->endpoint;
 
-        if (isset(json_decode($this->body)->mode)) {
-            if (json_decode($this->body)->mode == 'test') {
-                $endpoint = $this->endpoint;
-            } else {
-                $endpoint = str_replace('https://pgs-sandbox.globalaccelerex.com/api/cps/v1', 'https://pgs-sandbox.globalaccelerex.com/api/cps/v1', $this->endpoint);
-            }
-        }
-        elseif(explode("?mode=", $endpoint)[1] == 'live'){
-            $endpoint = str_replace('https://pgs-sandbox.globalaccelerex.com/api/cps/v1', 'https://pgs-sandbox.globalaccelerex.com/api/cps/v1', $this->endpoint);
-        }
+        // if (isset(json_decode($this->body)->mode)) {
+        //     if (json_decode($this->body)->mode == 'test') {
+        //         $endpoint = $this->endpoint;
+        //     } else {
+        //         $endpoint = str_replace('https://pgs-sandbox.globalaccelerex.com/api/cps/v1', 'https://pgs-sandbox.globalaccelerex.com/api/cps/v1', $this->endpoint);
+        //     }
+        // }
+        // elseif(explode("?mode=", $endpoint)[1] == 'live'){
+        //     $endpoint = str_replace('https://pgs-sandbox.globalaccelerex.com/api/cps/v1', 'https://pgs-sandbox.globalaccelerex.com/api/cps/v1', $this->endpoint);
+        // }
 
         //open connection
         $ch = \curl_init();
