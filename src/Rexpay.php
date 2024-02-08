@@ -103,6 +103,8 @@ class Rexpay
     }
 
     public function authorizationUrl(){
+
+
         $uri = 'https://pgs-sandbox.globalaccelerex.com/api/cps/v1/getTransactionStatus?transactionReference=';
 
         return $uri;

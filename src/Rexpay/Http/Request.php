@@ -144,3 +144,4 @@ class Request
         \curl_close($ch);
     }
 }
+

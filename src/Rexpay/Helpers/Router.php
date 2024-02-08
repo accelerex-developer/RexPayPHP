@@ -30,8 +30,9 @@ class Router
     ];
 
     const ID_KEY = 'id';
-    const REXPAY_API_ROOT = 'https://pgs-sandbox.globalaccelerex.com/api/cps/v1';
-    const REXPAY_API_ROOT_LIVE = 'https://pgs-sandbox.globalaccelerex.com/api/cps/v1';
+    const REXPAY_API_ROOT = 'https://pgs-sandbox.globalaccelerex.com/api/pgs';
+    const REXPAY_API_ROOT_LIVE = 'https://pgs-sandbox.globalaccelerex.com/api/pgs';
+    const REXPAY_API_ROOT_VERIFY_TRANSACTION = 'https://pgs-sandbox.globalaccelerex.com/api/cps/v1';
 
 
     public function __call($methd, $sentargs)

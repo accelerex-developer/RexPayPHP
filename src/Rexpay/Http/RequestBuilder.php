@@ -17,6 +17,7 @@ class RequestBuilder
 
     public function __construct($rexpayObj, $interface, array $payload = [ ], array $sentargs = [ ])
     {
+
         $this->request = new Request($rexpayObj);
         $this->rexpayObj = $rexpayObj;
         $this->interface = $interface;
@@ -26,8 +27,10 @@ class RequestBuilder
 
     public function build()
     {
+
+
         $this->request->headers["User-Agent"] = "Rexpay/v1 PhpBindings/" . Rexpay::VERSION;
-        $this->request->endpoint = Router::REXPAY_API_ROOT . $this->interface[RouteInterface::ENDPOINT_KEY];
+        $this->request->endpoint = ($this->interface[RouteInterface::ENDPOINT_KEY] === "/getTransactionStatus?transactionReference={transactionReference}" ? Router::REXPAY_API_ROOT_VERIFY_TRANSACTION : Router::REXPAY_API_ROOT) . $this->interface[RouteInterface::ENDPOINT_KEY];
         $this->request->method = $this->interface[RouteInterface::METHOD_KEY];
         $this->moveArgsToSentargs();
         $this->putArgsIntoEndpoint($this->request->endpoint);
@@ -66,4 +69,13 @@ class RequestBuilder
             }
         }
     }
+
+    public function array_search_partial($arr, $keyword)
+    {
+        foreach ($arr as $index => $string) {
+            if (strpos($string, $keyword) !== FALSE)
+                return $index;
+        }
+    }
+
 }

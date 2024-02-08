@@ -25,7 +25,7 @@ class Transaction implements RouteInterface
                 'userId',
                 'callbackUrl',
                 'metadata',
-                'mode'
+                'authToken'
             ],
         ];
     }

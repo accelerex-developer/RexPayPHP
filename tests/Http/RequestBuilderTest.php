@@ -35,13 +35,13 @@ class RequestBuilderTest extends \PHPUnit_Framework_TestCase
     public function testBuild()
     {
         $p = new Rexpay('REXSECK_');
-        $params = ['reference' => 'sm23oyr1122', 'amount'=>2.00, 'currency'=>'NGN', 'userId'=> 'awoyeyetimilehin@gmail.com', 'callbackUrl'=>'google.com', 'metadata'=>['email' => "awoyeyetimilehin@gmail.com", 'customerName' => "Victor Musa"], 'mode' => 'test'];
+        $params = ['reference' => 'sm23oyr1122', 'amount'=>2.00, 'currency'=>'NGN', 'userId'=> 'awoyeyetimilehin@gmail.com', 'callbackUrl'=>'google.com', 'metadata'=>['email' => "awoyeyetimilehin@gmail.com", 'customerName' => "Victor Musa"], 'authToken' => 'dGFsazJwaGFzYWhzeXlhaG9vY29tOmYwYmVkYmVhOTNkZjA5MjY0YTRmMDlhNmIzOGRlNmU5YjkyNGI2Y2I5MmJmNGEwYzA3Y2U0NmYyNmY4NQ=='];
         $rb = new RequestBuilder($p, Transaction::initialize(), $params);
 
         $r = $rb->build();
 
 
-        $this->assertEquals('https://pgs-sandbox.globalaccelerex.com/api/cps/v1/payment/v2/createPayment', $r->endpoint);
+        $this->assertEquals('https://pgs-sandbox.globalaccelerex.com/api/pgs/payment/v2/createPayment', $r->endpoint);
         $this->assertEquals('post', $r->method);
         $this->assertEquals(json_encode($params), $r->body);
 
@@ -52,7 +52,7 @@ class RequestBuilderTest extends \PHPUnit_Framework_TestCase
         $r = $rb->build();
 
 
-        $this->assertEquals('https://pgs-sandbox.globalaccelerex.com/api/cps/v1/request?perPage=10', $r->endpoint);
+        $this->assertEquals('https://pgs-sandbox.globalaccelerex.com/api/pgs/request?perPage=10', $r->endpoint);
         $this->assertEquals('get', $r->method);
         $this->assertEmpty($r->body);
 
@@ -65,5 +65,6 @@ class RequestBuilderTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('https://pgs-sandbox.globalaccelerex.com/api/cps/v1/getTransactionStatus?transactionReference=sm23oyr1122', $r->endpoint);
         $this->assertEquals('get', $r->method);
         $this->assertEmpty($r->body);
+
     }
 }
