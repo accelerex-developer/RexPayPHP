@@ -58,8 +58,7 @@ Initialize a transaction by calling our API.
         'currency'=>"NGN",     // string   
         'userId'=>"awoyeyetimilehin@gmail.com",     // string   
         'callbackUrl'=>"google.com",     // string   
-        'metadata'=> ['email' => "awoyeyetimilehin@gmail.com", 'customerName' => "Victor Musa"], // array
-        'authToken'=>"dGFsazJwaGFzYWhzeXlhaG9vY29tOmYwYmVkYmVhOTNkZjA5MjY0YTRmMDlhNmIzOGRlNmU5YjkyNGI2Y2I5MmJmNGEwYzA3Y2U0NmYyNmY4NQ==", // string
+        'metadata'=> ['email' => "awoyeyetimilehin@gmail.com", 'customerName' => "Victor Musa"] // string
       ]);
     } catch(\Pils36\Rexpay\Exception\ApiException $e){
       print_r($e->getResponseObject());
