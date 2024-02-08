@@ -38,6 +38,7 @@ class TransactionTest extends \PHPUnit_Framework_TestCase
     public function testMethods()
     {
         $r = new Transaction();
+
         $this->assertEquals(RouteInterface::GET_METHOD, $r->verifyAccessCode()[RouteInterface::METHOD_KEY]);
         $this->assertEquals(RouteInterface::GET_METHOD, $r->verify()[RouteInterface::METHOD_KEY]);
         $this->assertEquals(RouteInterface::GET_METHOD, $r->getList()[RouteInterface::METHOD_KEY]);

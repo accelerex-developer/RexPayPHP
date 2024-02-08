@@ -39,4 +39,3 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $this->assertNotNull($hs[0]);
     }
 }
-
