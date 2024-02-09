@@ -35,7 +35,7 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         $r = new Response();
         $r->okay = true;
         $r->forApi = true;
-        $r->body = '{"responseCode":"00","data":{"responseCode":"00"}}';
+        $r->body = '{"responseCode":"00", "status": "okay", "data":{"responseCode":"00", "status": "okay"}}';
 
         $resp = $r->wrapUp();
         $this->assertEquals('00', $resp->data->responseCode);
