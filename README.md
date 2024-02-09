@@ -102,6 +102,7 @@ After we redirect to your callback url, please verify the transaction before giv
     }
 
     ($tranx->responseCode === 00) => "success";
+    ($tranx->responseCode === 01) => "failed";
     ($tranx->responseCode === 02) => "pending";
 
     if ($tranx->responseCode === 00) {
