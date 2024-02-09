@@ -1,6 +1,6 @@
 # Changelog
 
-All Notable changes to `wayapay-php` will be documented in this file.
+All Notable changes to `rexpay` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
@@ -30,12 +30,12 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - To do a direct register_autoload, include autoload.php
 
 ### Deprecated
-- ~Wayapay::registerAutoloader();~
+- ~Rexpay::registerAutoloader();~
 
 ## 2.0 - 2016-04-26
 
 ### Changes
-- Calls will return an Object of stdClass or throw a Wayapay API/cURL error instead of
+- Calls will return an Object of stdClass or throw a Rexpay API/cURL error instead of
 an array as in version 1
 - Root namespace is now Yabacon instead of YabaCon
 

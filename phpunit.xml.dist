@@ -10,7 +10,7 @@
          processIsolation="false"
          stopOnFailure="false">
     <testsuites>
-        <testsuite name="Pils36 Wayapay Test Suite">
+        <testsuite name="Pils36 Rexpay Test Suite">
             <directory>tests</directory>
         </testsuite>
     </testsuites>
