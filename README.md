@@ -109,7 +109,7 @@ After we redirect to your callback url, please verify the transaction before giv
       // transaction was successful...
       // please check other things like whether you already gave value for this transactions
       // if the email matches the customer who owns the product etc
-      // Save your transaction information
+      // Save your transaction information here
     }
 ```
 
