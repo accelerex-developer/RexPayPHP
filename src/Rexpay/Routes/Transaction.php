@@ -25,7 +25,8 @@ class Transaction implements RouteInterface
                 'userId',
                 'callbackUrl',
                 'metadata',
-                'authToken'
+                'authToken',
+                'mode'
             ],
         ];
     }
@@ -123,7 +124,8 @@ class Transaction implements RouteInterface
             RouteInterface::ENDPOINT_KEY => Transaction::root() . '/getTransactionStatus',
             RouteInterface::PARAMS_KEY => [
                 'transactionReference',
-                'authToken'
+                'authToken',
+                'mode'
             ]
         ];
     }

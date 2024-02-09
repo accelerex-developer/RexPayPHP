@@ -124,9 +124,23 @@ class Request
 
     public function attemptCurl()
     {
+        $endpoint = $this->endpoint;
+
+        if (isset(json_decode($this->body)->mode)) {
+            if (json_decode($this->body)->mode == 'test') {
+                $endpoint = $this->endpoint;
+            } else {
+
+                if (isset(json_decode($this->body)->transactionReference)) {
+                    $endpoint = str_replace('https://pgs-sandbox.globalaccelerex.com/api/cps/v1', 'https://cps.globalaccelerex.com', $this->endpoint);
+                } else {
+                    $endpoint = str_replace('https://pgs-sandbox.globalaccelerex.com/api/pgs', 'https://pgs.globalaccelerex.com', $this->endpoint);
+                }
+            }
+        }
         //open connection attempt
         $ch = \curl_init();
-        \curl_setopt($ch, \CURLOPT_URL, $this->endpoint);
+        \curl_setopt($ch, \CURLOPT_URL, $endpoint);
         ($this->method === RouteInterface::POST_METHOD) && \curl_setopt($ch, \CURLOPT_POST, true);
         ($this->method === RouteInterface::PUT_METHOD) && \curl_setopt($ch, \CURLOPT_CUSTOMREQUEST, 'PUT');
 

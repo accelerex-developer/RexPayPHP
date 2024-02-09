@@ -59,7 +59,8 @@ Initialize a transaction by calling our API.
         'userId'=>"awoyeyetimilehin@gmail.com",     // string   
         'callbackUrl'=>"google.com",     // string   
         'metadata'=> ['email' => "awoyeyetimilehin@gmail.com", 'customerName' => "Victor Musa"], // string
-        'authToken'=> `$authtoken` // string - (Basic Authentication Token)
+        'authToken'=> `$authtoken`, // string - (Basic Authentication Token)
+        'mode' => 'test' // test or production
       ]);
 
 
@@ -94,7 +95,8 @@ After we redirect to your callback url, please verify the transaction before giv
       // verify using the library
       $tranx = $rexpay->transaction->verify([
         'transactionReference'=>$reference, // unique to transactions
-        'authToken'=> `$authtoken` // string - (Basic Authentication Token)
+        'authToken'=> `$authtoken`, // string - (Basic Authentication Token)
+        'mode' => 'test' // test or production
       ]);
     } catch(\Pils36\Rexpay\Exception\ApiException $e){
       print_r($e->getResponseObject());

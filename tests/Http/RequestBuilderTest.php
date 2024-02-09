@@ -35,7 +35,7 @@ class RequestBuilderTest extends \PHPUnit_Framework_TestCase
     public function testBuild()
     {
         $p = new Rexpay('REXSECK_');
-        $params = ['reference' => 'sm23oyr1122', 'amount'=>2.00, 'currency'=>'NGN', 'userId'=> 'awoyeyetimilehin@gmail.com', 'callbackUrl'=>'google.com', 'metadata'=>['email' => "awoyeyetimilehin@gmail.com", 'customerName' => "Victor Musa"], 'authToken' => 'dGFsazJwaGFzYWhzeXlhaG9vY29tOmYwYmVkYmVhOTNkZjA5MjY0YTRmMDlhNmIzOGRlNmU5YjkyNGI2Y2I5MmJmNGEwYzA3Y2U0NmYyNmY4NQ=='];
+        $params = ['reference' => 'sm23oyr1122', 'amount'=>2.00, 'currency'=>'NGN', 'userId'=> 'awoyeyetimilehin@gmail.com', 'callbackUrl'=>'google.com', 'metadata'=>['email' => "awoyeyetimilehin@gmail.com", 'customerName' => "Victor Musa"], 'authToken' => 'dGFsazJwaGFzYWhzeXlhaG9vY29tOmYwYmVkYmVhOTNkZjA5MjY0YTRmMDlhNmIzOGRlNmU5YjkyNGI2Y2I5MmJmNGEwYzA3Y2U0NmYyNmY4NQ==', 'mode' => 'test'];
         $rb = new RequestBuilder($p, Transaction::initialize(), $params);
 
         $r = $rb->build();
@@ -56,7 +56,7 @@ class RequestBuilderTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty($r->body);
 
 
-        $params = ['transactionReference' => 'sm23oyr1122', 'authToken' => 'dGFsazJwaGFzYWhzeXlhaG9vY29tOmYwYmVkYmVhOTNkZjA5MjY0YTRmMDlhNmIzOGRlNmU5YjkyNGI2Y2I5MmJmNGEwYzA3Y2U0NmYyNmY4NQ=='];
+        $params = ['transactionReference' => 'sm23oyr1122', 'authToken' =>'dGFsazJwaGFzYWhzeXlhaG9vY29tOmYwYmVkYmVhOTNkZjA5MjY0YTRmMDlhNmIzOGRlNmU5YjkyNGI2Y2I5MmJmNGEwYzA3Y2U0NmYyNmY4NQ==', 'mode' => 'test'];
         $rb = new RequestBuilder($p, Transaction::verify(), $params );
 
         $r = $rb->build();
