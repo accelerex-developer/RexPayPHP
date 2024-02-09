@@ -32,6 +32,12 @@ class Request
 
     public function flattenedHeaders()
     {
+        $basicAuthToken = json_decode($this->body);
+
+        if(isset($basicAuthToken)) {
+            $this->headers['Authorization'] = 'Basic ' . $basicAuthToken->authToken;
+        }
+
         $_ = [];
         foreach ($this->headers as $key => $value) {
             $_[] = $key . ": " . $value;
@@ -118,7 +124,6 @@ class Request
 
     public function attemptCurl()
     {
-
         //open connection attempt
         $ch = \curl_init();
         \curl_setopt($ch, \CURLOPT_URL, $this->endpoint);

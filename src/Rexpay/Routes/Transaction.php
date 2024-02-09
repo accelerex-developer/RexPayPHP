@@ -121,7 +121,7 @@ class Transaction implements RouteInterface
         return [
             RouteInterface::METHOD_KEY => RouteInterface::GET_METHOD,
             RouteInterface::ENDPOINT_KEY => Transaction::root() . '/getTransactionStatus?transactionReference={transactionReference}',
-            RouteInterface::ARGS_KEY => ['transactionReference'],
+            RouteInterface::ARGS_KEY => ['transactionReference', 'authToken'],
         ];
     }
 

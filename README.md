@@ -38,7 +38,7 @@ Confirm that your server can conclude a TLSv1.2 connection to Rexpay's servers. 
 *Don't disable SSL peer verification!*
 
 ### 1. Prepare your parameters
-`email`, `amount`, `description`, `rexPublicKey` and `merchantId` are the most common compulsory parameters.
+`email`, `userId`, `amount`, `description`, `reference` and `authToken` are the most common compulsory parameters.
 
 ### 2. Initialize a transaction
 Initialize a transaction by calling our API.
@@ -54,12 +54,16 @@ Initialize a transaction by calling our API.
 
       $tranx = $rexpay->transaction->initialize([
         'reference'=>"sm23oyr1122",     // string   
-        'amount'=>2.00,     // double   
+        'amount'=>200,     // integer   
         'currency'=>"NGN",     // string   
         'userId'=>"awoyeyetimilehin@gmail.com",     // string   
         'callbackUrl'=>"google.com",     // string   
-        'metadata'=> ['email' => "awoyeyetimilehin@gmail.com", 'customerName' => "Victor Musa"] // string
+        'metadata'=> ['email' => "awoyeyetimilehin@gmail.com", 'customerName' => "Victor Musa"], // string
+        'authToken'=> "dGFsazJwaGFzYWhzeXlhaG9vY29tOmYwYmVkYmVhOTNkZjA5MjY0YTRmMDlhNmIzOGRlNmU5YjkyNGI2Y2I5MmJmNGEwYzA3Y2U0NmYyNmY4NQ==" // string 
       ]);
+
+
+
     } catch(\Pils36\Rexpay\Exception\ApiException $e){
       print_r($e->getResponseObject());
       die($e->getMessage());
@@ -67,14 +71,14 @@ Initialize a transaction by calling our API.
 
     // store transaction reference so we can query in case user never comes back
     // perhaps due to network issue
-    saveLastTransactionId($tranx->data->tranId);
+    saveLastTransactionId($tranx);
 
 
     // Get Authorization URL to make payment to the Rexpay payment gateway environment
     $uri = $rexpay->authorizationUrl();  // change to live for production
 
     // Use the authorization url to
-    $authorization_url = $uri.$tranx->data->tranId;
+    $authorization_url = $uri.$tranx->reference;
 
 ```
 

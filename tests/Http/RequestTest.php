@@ -30,7 +30,7 @@ class RequestTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf(Response::class, $rp);
     }
 
-    public function testFlattenedHeadersAndThatOnlyContentTypeAddedByDefaultWhenWayapayObjectPresent()
+    public function testFlattenedHeadersAndThatOnlyContentTypeAddedByDefaultWhenRexpayObjectPresent()
     {
         $p = new Rexpay('REXSECK_');
         $rq = new Request($p);

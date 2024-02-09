@@ -56,7 +56,7 @@ class RequestBuilderTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('get', $r->method);
         $this->assertEmpty($r->body);
 
-        $args = ['transactionReference'=> 'sm23oyr1122'];
+        $args = ['transactionReference'=> 'sm23oyr1122', 'authToken'=> 'dGFsazJwaGFzYWhzeXlhaG9vY29tOmYwYmVkYmVhOTNkZjA5MjY0YTRmMDlhNmIzOGRlNmU5YjkyNGI2Y2I5MmJmNGEwYzA3Y2U0NmYyNmY4NQ=='];
         $rb = new RequestBuilder($p, Transaction::verify(), [], $args);
 
         $r = $rb->build();
