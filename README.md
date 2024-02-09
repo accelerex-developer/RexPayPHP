@@ -93,7 +93,7 @@ After we redirect to your callback url, please verify the transaction before giv
     {
       // verify using the library
       $tranx = $rexpay->transaction->verify([
-        'transactionReference'=>$transactionId, // unique to transactions
+        'transactionReference'=>$reference, // unique to transactions
         'authToken'=> `$authtoken` // string - (Basic Authentication Token)
       ]);
     } catch(\Pils36\Rexpay\Exception\ApiException $e){
@@ -106,8 +106,7 @@ After we redirect to your callback url, please verify the transaction before giv
     ($tranx->responseCode === 02) => "pending";
 
     if ($tranx->responseCode === 00) {
-      // transaction was successful...
-      // please check other things like whether you already gave value for this transactions
+      // transaction was successful... Please check other things like whether you already gave value for this transactions
       // if the email matches the customer who owns the product etc
       // Save your transaction information here
     }
