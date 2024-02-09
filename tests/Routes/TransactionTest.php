@@ -20,7 +20,7 @@ class TransactionTest extends \PHPUnit_Framework_TestCase
             $r->verifyAccessCode()[RouteInterface::ENDPOINT_KEY]
         );
 
-        $this->assertEquals('/getTransactionStatus?transactionReference={transactionReference}', $r->verify()[RouteInterface::ENDPOINT_KEY]);
+        $this->assertEquals('/getTransactionStatus', $r->verify()[RouteInterface::ENDPOINT_KEY]);
         $this->assertEquals('/request', $r->getList()[RouteInterface::ENDPOINT_KEY]);
         $this->assertEquals('/{id}', $r->fetch()[RouteInterface::ENDPOINT_KEY]);
         $this->assertEquals('/payment/v2/createPayment', $r->initialize()[RouteInterface::ENDPOINT_KEY]);
@@ -39,7 +39,7 @@ class TransactionTest extends \PHPUnit_Framework_TestCase
     {
         $r = new Transaction();
         $this->assertEquals(RouteInterface::GET_METHOD, $r->verifyAccessCode()[RouteInterface::METHOD_KEY]);
-        $this->assertEquals(RouteInterface::GET_METHOD, $r->verify()[RouteInterface::METHOD_KEY]);
+        $this->assertEquals(RouteInterface::POST_METHOD, $r->verify()[RouteInterface::METHOD_KEY]);
         $this->assertEquals(RouteInterface::GET_METHOD, $r->getList()[RouteInterface::METHOD_KEY]);
         $this->assertEquals(RouteInterface::GET_METHOD, $r->fetch()[RouteInterface::METHOD_KEY]);
         $this->assertEquals(RouteInterface::POST_METHOD, $r->initialize()[RouteInterface::METHOD_KEY]);

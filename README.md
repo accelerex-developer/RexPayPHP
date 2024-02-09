@@ -59,7 +59,7 @@ Initialize a transaction by calling our API.
         'userId'=>"awoyeyetimilehin@gmail.com",     // string   
         'callbackUrl'=>"google.com",     // string   
         'metadata'=> ['email' => "awoyeyetimilehin@gmail.com", 'customerName' => "Victor Musa"], // string
-        'authToken'=> "dGFsazJwaGFzYWhzeXlhaG9vY29tOmYwYmVkYmVhOTNkZjA5MjY0YTRmMDlhNmIzOGRlNmU5YjkyNGI2Y2I5MmJmNGEwYzA3Y2U0NmYyNmY4NQ==" // string 
+        'authToken'=> `$authtoken` // string - (Basic Authentication Token)
       ]);
 
 
@@ -72,13 +72,6 @@ Initialize a transaction by calling our API.
     // store transaction reference so we can query in case user never comes back
     // perhaps due to network issue
     saveLastTransactionId($tranx);
-
-
-    // Get Authorization URL to make payment to the Rexpay payment gateway environment
-    $uri = $rexpay->authorizationUrl();  // change to live for production
-
-    // Use the authorization url to
-    $authorization_url = $uri.$tranx->reference;
 
 ```
 
@@ -94,25 +87,24 @@ Before you give value to the customer, please make a server-side call to our ver
 After we redirect to your callback url, please verify the transaction before giving value.
 
 ```php
-    $transactionId = isset($_GET['transactionReference']) ? $_GET['transactionReference'] : '';
-    if(!$transactionId){
-      die('No transaction id provided');
-    }
-
     // initiate the Library's Rexpay Object
     $rexpay = new Pils36\Rexpay;
     try
     {
       // verify using the library
       $tranx = $rexpay->transaction->verify([
-        'transactionReference'=>$transactionId // unique to transactions
+        'transactionReference'=>$transactionId, // unique to transactions
+        'authToken'=> `$authtoken` // string - (Basic Authentication Token)
       ]);
     } catch(\Pils36\Rexpay\Exception\ApiException $e){
       print_r($e->getResponseObject());
       die($e->getMessage());
     }
 
-    if ($tranx->status === true) {
+    ($tranx->responseCode === 00) => "success";
+    ($tranx->responseCode === 02) => "pending";
+
+    if ($tranx->responseCode === 00) {
       // transaction was successful...
       // please check other things like whether you already gave value for this transactions
       // if the email matches the customer who owns the product etc

@@ -30,7 +30,7 @@ class RequestBuilder
 
 
         $this->request->headers["User-Agent"] = "Rexpay/v1 PhpBindings/" . Rexpay::VERSION;
-        $this->request->endpoint = ($this->interface[RouteInterface::ENDPOINT_KEY] === "/getTransactionStatus?transactionReference={transactionReference}" ? Router::REXPAY_API_ROOT_VERIFY_TRANSACTION : Router::REXPAY_API_ROOT) . $this->interface[RouteInterface::ENDPOINT_KEY];
+        $this->request->endpoint = ($this->interface[RouteInterface::ENDPOINT_KEY] === "/getTransactionStatus" ? Router::REXPAY_API_ROOT_VERIFY_TRANSACTION : Router::REXPAY_API_ROOT) . $this->interface[RouteInterface::ENDPOINT_KEY];
         $this->request->method = $this->interface[RouteInterface::METHOD_KEY];
         $this->moveArgsToSentargs();
         $this->putArgsIntoEndpoint($this->request->endpoint);

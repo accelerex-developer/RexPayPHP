@@ -119,9 +119,12 @@ class Transaction implements RouteInterface
     public static function verify()
     {
         return [
-            RouteInterface::METHOD_KEY => RouteInterface::GET_METHOD,
-            RouteInterface::ENDPOINT_KEY => Transaction::root() . '/getTransactionStatus?transactionReference={transactionReference}',
-            RouteInterface::ARGS_KEY => ['transactionReference', 'authToken'],
+            RouteInterface::METHOD_KEY => RouteInterface::POST_METHOD,
+            RouteInterface::ENDPOINT_KEY => Transaction::root() . '/getTransactionStatus',
+            RouteInterface::PARAMS_KEY => [
+                'transactionReference',
+                'authToken'
+            ]
         ];
     }
 

@@ -51,20 +51,20 @@ class RequestBuilderTest extends \PHPUnit_Framework_TestCase
 
         $r = $rb->build();
 
-
         $this->assertEquals('https://pgs-sandbox.globalaccelerex.com/api/pgs/request?perPage=10', $r->endpoint);
         $this->assertEquals('get', $r->method);
         $this->assertEmpty($r->body);
 
-        $args = ['transactionReference'=> 'sm23oyr1122', 'authToken'=> 'dGFsazJwaGFzYWhzeXlhaG9vY29tOmYwYmVkYmVhOTNkZjA5MjY0YTRmMDlhNmIzOGRlNmU5YjkyNGI2Y2I5MmJmNGEwYzA3Y2U0NmYyNmY4NQ=='];
-        $rb = new RequestBuilder($p, Transaction::verify(), [], $args);
+
+        $params = ['transactionReference' => 'sm23oyr1122', 'authToken' => 'dGFsazJwaGFzYWhzeXlhaG9vY29tOmYwYmVkYmVhOTNkZjA5MjY0YTRmMDlhNmIzOGRlNmU5YjkyNGI2Y2I5MmJmNGEwYzA3Y2U0NmYyNmY4NQ=='];
+        $rb = new RequestBuilder($p, Transaction::verify(), $params );
 
         $r = $rb->build();
 
+        $this->assertEquals('https://pgs-sandbox.globalaccelerex.com/api/cps/v1/getTransactionStatus', $r->endpoint);
+        $this->assertEquals('post', $r->method);
+        $this->assertEquals(json_encode($params), $r->body);
 
-        $this->assertEquals('https://pgs-sandbox.globalaccelerex.com/api/cps/v1/getTransactionStatus?transactionReference=sm23oyr1122', $r->endpoint);
-        $this->assertEquals('get', $r->method);
-        $this->assertEmpty($r->body);
 
     }
 }

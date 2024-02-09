@@ -102,10 +102,10 @@ class Rexpay
         return new Router($name, $this);
     }
 
-    public function authorizationUrl(){
+    public function transactionVerificationStatusUrl(){
 
 
-        $uri = 'https://pgs-sandbox.globalaccelerex.com/api/cps/v1/getTransactionStatus?transactionReference=';
+        $uri = 'https://pgs-sandbox.globalaccelerex.com/api/cps/v1/getTransactionStatus';
 
         return $uri;
     }
