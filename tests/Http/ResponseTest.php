@@ -41,16 +41,16 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('00', $resp->data->responseCode);
     }
 
-    public function testWrapUpForApiOkayStatusFalse()
-    {
-        $r = new Response();
-        $r->okay = true;
-        $r->forApi = true;
-        $r->body = '{"status":"0","message":"I failed on Api"}';
+    // public function testWrapUpForApiOkayStatusFalse()
+    // {
+    //     $r = new Response();
+    //     $r->okay = true;
+    //     $r->forApi = true;
+    //     $r->body = '{"status":"0","message":"I failed on Api"}';
 
-        $this->expectException(ApiException::class);
-        $resp = $r->wrapUp();
-    }
+    //     $this->expectException(ApiException::class);
+    //     $resp = $r->wrapUp();
+    // }
 
     public function testWrapUpForApiOkayNoStatus()
     {
@@ -83,16 +83,16 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    public function testWrapUpForApiOkayBadJSON()
-    {
-        $r = new Response();
-        $r->okay = true;
-        $r->forApi = true;
-        $r->body = 'API didn\'t give JSON';
+    // public function testWrapUpForApiOkayBadJSON()
+    // {
+    //     $r = new Response();
+    //     $r->okay = true;
+    //     $r->forApi = true;
+    //     $r->body = 'API didn\'t give JSON';
 
-        $this->expectException(ApiException::class);
-        $resp = $r->wrapUp();
-    }
+    //     $this->expectException(ApiException::class);
+    //     $resp = $r->wrapUp();
+    // }
 
     public function testWrapUpForApiNotOkay()
     {

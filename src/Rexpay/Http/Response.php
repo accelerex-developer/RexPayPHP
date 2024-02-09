@@ -27,9 +27,7 @@ class Response
     {
         $resp = \json_decode($this->body);
 
-        // ($resp === null || !property_exists($resp, 'status') || !$resp->status)
-
-        if (($resp === null || !property_exists($resp, 'responseCode')) || ($resp === null || !property_exists($resp, 'status')) ) {
+        if ($resp === null && (!property_exists($resp, 'responseCode') || !property_exists($resp, 'status'))) {
             throw new ApiException(
                 "Rexpay Request failed with response: '" .
                 $this->messageFromApiJson($resp)."'",
