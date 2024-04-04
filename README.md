@@ -45,7 +45,8 @@ Initialize a transaction by calling our API.
 
 
 ### Note: $authtoken is a Basic Authentication Token 
-Your username:password in base64 encoded. You can reference the link to generate basic authentication token [Basic Auth Header Generator](https://www.debugbear.com/basic-auth-header-generator)
+Your username:password in base64 encoded. You can reference the link to generate basic authentication token 
+### [Basic Auth Header Generator](https://www.debugbear.com/basic-auth-header-generator)
 
 
 
