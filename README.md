@@ -69,7 +69,7 @@ Your username:password in base64 encoded. You can reference the link to generate
         'userId'=>"awoyeyetimilehin@gmail.com",     // string   
         'callbackUrl'=>"google.com",     // string   
         'metadata'=> ['email' => "awoyeyetimilehin@gmail.com", 'customerName' => "Victor Musa"], // string
-        'authToken'=> `$authtoken`, // string - (Basic Authentication Token)
+        'authToken'=> $authtoken, // string - (Basic Authentication Token)
         'mode' => 'test' // test or production
       ]);
 
@@ -105,7 +105,7 @@ After we redirect to your callback url, please verify the transaction before giv
       // verify using the library
       $tranx = $rexpay->transaction->verify([
         'transactionReference'=>$reference, // unique to transactions
-        'authToken'=> `$authtoken`, // string - (Basic Authentication Token)
+        'authToken'=> $authtoken, // string - (Basic Authentication Token)
         'mode' => 'test' // test or production
       ]);
     } catch(\Pils36\Rexpay\Exception\ApiException $e){
@@ -113,11 +113,11 @@ After we redirect to your callback url, please verify the transaction before giv
       die($e->getMessage());
     }
 
-    ($tranx->responseCode === 00) => "success";
-    ($tranx->responseCode === 01) => "failed";
-    ($tranx->responseCode === 02) => "pending";
+    ($tranx->responseCode === "00") => "success";
+    ($tranx->responseCode === "01") => "failed";
+    ($tranx->responseCode === "02") => "pending";
 
-    if ($tranx->responseCode === 00) {
+    if ($tranx->responseCode === "00") {
       // transaction was successful... Please check other things like whether you already gave value for this transactions
       // if the email matches the customer who owns the product etc
       // Save your transaction information here
