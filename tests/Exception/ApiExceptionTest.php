@@ -4,7 +4,7 @@ namespace Pils36\Rexpay\Tests\Exception;
 
 use Pils36\Rexpay\Exception\ApiException;
 
-class ApiExceptionTest extends \PHPUnit_Framework_TestCase
+class ApiExceptionTest extends \PHPUnit\Framework\TestCase
 {
     public function testInitialize()
     {

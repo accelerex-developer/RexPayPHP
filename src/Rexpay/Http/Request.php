@@ -90,6 +90,10 @@ class Request
         if (!$this->response->okay) {
             $this->attemptFileGetContents();
         }
+        if (!$this->response->okay) {
+            $msg = !empty($this->response->messages) ? implode('; ', $this->response->messages) : 'All HTTP transports failed.';
+            throw new \Pils36\Rexpay\Exception\TransportException($msg);
+        }
         return $this->response;
     }
 
@@ -125,10 +129,14 @@ class Request
                     || $e instanceof \GuzzleHttp\Exception\ConnectException
                     || $e instanceof \GuzzleHttp\Exception\RequestException
                     || $e instanceof \GuzzleHttp\Exception\ServerException)) {
-                    if ($e->hasResponse()) {
+                    if (method_exists($e, 'hasResponse') && $e->hasResponse() && $e->getResponse()) {
                         $this->response->body = $e->getResponse()->getBody()->getContents();
+                        $this->response->okay = true;
+                    } else {
+                        $this->response->okay = false;
                     }
-                    $this->response->okay = true;
+                } else {
+                    $this->response->okay = false;
                 }
                 $this->response->messages[] = $e->getMessage();
             }
@@ -150,7 +158,7 @@ class Request
                 )
             ]
         );
-        $this->response->body = file_get_contents($this->endpoint, false, $context);
+        $this->response->body = @file_get_contents($this->endpoint, false, $context);
         if ($this->response->body === false) {
             $this->response->messages[] = "file_get_contents failed with response: '" . error_get_last()['message'] . "'.";
         } else {
