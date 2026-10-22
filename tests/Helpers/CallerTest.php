@@ -5,7 +5,7 @@ use Pils36\Rexpay\Helpers\Caller;
 use Pils36\Rexpay;
 use Pils36\Rexpay\Contracts\RouteInterface;
 
-class CallerTest extends \PHPUnit_Framework_TestCase
+class CallerTest extends \PHPUnit\Framework\TestCase
 {
     public function testInitialize()
     {

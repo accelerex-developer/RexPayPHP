@@ -1,11 +1,13 @@
 <?php
 namespace Pils36\Rexpay\Tests;
 
-class AutoloadTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+use Pils36\Rexpay;
+
+class AutoloadTest extends TestCase
 {
     public function testAutoload()
     {
-        $rexpay_autoloader = require(__DIR__ . '/../src/autoload.php');
-        $rexpay_autoloader('Pils36\\Rexpay\\Routes\\Invoice');
+        $this->assertTrue(class_exists(Rexpay::class));
     }
 }

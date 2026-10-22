@@ -3,7 +3,7 @@ namespace Pils36\Rexpay\Tests;
 
 use Pils36\Rexpay\Fee;
 
-class FeeTest extends \PHPUnit_Framework_TestCase
+class FeeTest extends \PHPUnit\Framework\TestCase
 {
     public function testAddFor()
     {

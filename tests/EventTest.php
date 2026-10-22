@@ -4,7 +4,7 @@ namespace Pils36\Rexpay\Tests;
 use Pils36\Rexpay\Test\Mock\EventTestDouble as MockEvent;
 use Pils36\Rexpay\Event;
 
-class EventTest extends \PHPUnit_Framework_TestCase
+class EventTest extends \PHPUnit\Framework\TestCase
 {
     public function testDiscoverOwner()
     {

@@ -6,13 +6,13 @@ use Pils36\Rexpay\Helpers\Router;
 use Pils36\Rexpay\Test\Mock\CustomRoute;
 use \Pils36\Rexpay\Exception\ValidationException;
 
-class RexpayTest extends \PHPUnit_Framework_TestCase
+class RexpayTest extends \PHPUnit\Framework\TestCase
 {
 
 
     public function testVersion()
     {
-        $this->assertEquals("2.1.19", Rexpay::VERSION);
+        $this->assertEquals("2.3.0", Rexpay::VERSION);
     }
 
     public function testDisableFileGetContentsFallback()

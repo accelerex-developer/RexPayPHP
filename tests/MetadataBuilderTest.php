@@ -4,7 +4,7 @@ namespace Pils36\Rexpay\Tests;
 use Pils36\Rexpay\MetadataBuilder;
 use Pils36\Rexpay\Exception\BadMetaNameException;
 
-class MetadataBuilderTest extends \PHPUnit_Framework_TestCase
+class MetadataBuilderTest extends \PHPUnit\Framework\TestCase
 {
     public function testWith()
     {

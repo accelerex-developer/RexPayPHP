@@ -8,7 +8,7 @@ use Pils36\Rexpay\Test\Mock\CustomRoute;
 use Pils36\Rexpay\Contracts\RouteInterface;
 use Pils36\Rexpay\Exception\ValidationException;
 
-class RouterTest extends \PHPUnit_Framework_TestCase
+class RouterTest extends \PHPUnit\Framework\TestCase
 {
     public function testInitialize()
     {
