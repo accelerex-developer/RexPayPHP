@@ -37,6 +37,23 @@ Extract, then:
     require 'path/to/src/autoload.php';
 ```
 
+## Configuration
+
+Credentials can be passed directly to the Rexpay constructor, or retrieved from your application's environment configuration (.env):
+
+`php
+use Pils36\Rexpay;
+
+// Pass directly via constructor:
+ = new Rexpay(
+    username: getenv('REXPAY_USERNAME') ?: 'your_username',
+    secretKey: getenv('REXPAY_SECRET_KEY') ?: 'your_secret_key',
+    mode: 'test' // 'test' or 'live'
+);
+`
+
+See .env.sample for reference environment variables.
+
 ## Usage
 
 Do a redirect to the authorization URL received from calling the /transaction endpoint. This URL is valid for one time use, so ensure that you generate a new URL per transaction.
