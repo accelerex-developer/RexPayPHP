@@ -4,7 +4,7 @@ namespace Pils36\Rexpay\Tests\Routes;
 use Pils36\Rexpay\Contracts\RouteInterface;
 use Pils36\Rexpay\Routes\Page;
 
-class PageTest extends \PHPUnit_Framework_TestCase
+class PageTest extends \PHPUnit\Framework\TestCase
 {
     public function testRoot()
     {
