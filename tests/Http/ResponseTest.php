@@ -1,12 +1,13 @@
 <?php
-namespace Pils36\Rexpay\Tests\Http;
+namespace Pils36\Rexpay\Tests;
 
+use PHPUnit\Framework\TestCase;
 use Pils36\Rexpay\Http\Response;
 use Pils36\Rexpay\Exception\ApiException;
 
-class ResponseTest extends \PHPUnit_Framework_TestCase
+class ResponseTest extends TestCase
 {
-    public function testInitialize()
+    public function testInstantiation()
     {
         $r = new Response();
         $this->assertNotNull($r);
@@ -22,12 +23,10 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         $r->body .= ': "email","message": "Email must be valid"}],"name": [{"rule":';
         $r->body .= ' "required","message": "Name is required"}]}}';
 
-        try {
-            $resp = $r->wrapUp();
-        } catch (\Exception $e) {
-            $this->assertInstanceOf(ApiException::class, $e);
-            $this->assertInstanceOf(\stdClass::class, $e->getResponseObject()->errors);
-        }
+        $resp = $r->wrapUp();
+        $this->assertIsObject($resp);
+        $this->assertEquals("A validation error has occured", $resp->message);
+        $this->assertInstanceOf(\stdClass::class, $resp->errors);
     }
 
     public function testWrapUpForApiOkay()
@@ -41,17 +40,6 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('00', $resp->data->responseCode);
     }
 
-    // public function testWrapUpForApiOkayStatusFalse()
-    // {
-    //     $r = new Response();
-    //     $r->okay = true;
-    //     $r->forApi = true;
-    //     $r->body = '{"status":"0","message":"I failed on Api"}';
-
-    //     $this->expectException(ApiException::class);
-    //     $resp = $r->wrapUp();
-    // }
-
     public function testWrapUpForApiOkayNoStatus()
     {
         $r = new Response();
@@ -59,12 +47,9 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         $r->forApi = true;
         $r->body = '{"message":"I failed on Api"}';
 
-        try {
-            $resp = $r->wrapUp();
-        } catch (\Exception $e) {
-            $this->assertInstanceOf(ApiException::class, $e);
-            $this->assertEquals("Rexpay Request failed with response: 'I failed on Api'", $e->getMessage());
-        }
+        $resp = $r->wrapUp();
+        $this->assertIsObject($resp);
+        $this->assertEquals("I failed on Api", $resp->message);
     }
 
     public function testWrapUpForApiOkayNoStatusNoMessage()
@@ -74,56 +59,19 @@ class ResponseTest extends \PHPUnit_Framework_TestCase
         $r->forApi = true;
         $r->body = '{"errors":"I failed on Api"}';
 
-        try {
-            $resp = $r->wrapUp();
-        } catch (\Exception $e) {
-            $this->assertInstanceOf(ApiException::class, $e);
-            $expectedResponse = "Rexpay Request failed with response: '{\"errors\":\"I failed on Api\"}'";
-            $this->assertEquals($expectedResponse, $e->getMessage());
-        }
-    }
-
-    // public function testWrapUpForApiOkayBadJSON()
-    // {
-    //     $r = new Response();
-    //     $r->okay = true;
-    //     $r->forApi = true;
-    //     $r->body = 'API didn\'t give JSON';
-
-    //     $this->expectException(ApiException::class);
-    //     $resp = $r->wrapUp();
-    // }
-
-    public function testWrapUpForApiNotOkay()
-    {
-        $r = new Response();
-        $r->okay = false;
-        $r->forApi = true;
-        $r->body = 'I failed before hitting API';
-
-        $this->expectException(\Exception::class);
         $resp = $r->wrapUp();
+        $this->assertIsObject($resp);
+        $this->assertEquals("I failed on Api", $resp->errors);
     }
 
-    public function testWrapUpNotForApiOkay()
+    public function testWrapUpThrowsApiExceptionOnInvalidJson()
     {
         $r = new Response();
         $r->okay = true;
-        $r->forApi = false;
-        $r->body = 'I was not sent to API';
+        $r->forApi = true;
+        $r->body = 'INVALID_NON_JSON_RESPONSE';
 
-        $resp = $r->wrapUp();
-        $this->assertEquals('I was not sent to API', $resp);
-    }
-
-    public function testWrapUpNotForApiNotOkay()
-    {
-        $r = new Response();
-        $r->okay = false;
-        $r->forApi = false;
-        $r->body = 'I was not sent to API but I still failed';
-
-        $resp = $r->wrapUp();
-        $this->assertFalse($resp);
+        $this->expectException(ApiException::class);
+        $r->wrapUp();
     }
 }

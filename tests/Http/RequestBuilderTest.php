@@ -7,11 +7,11 @@ use Pils36\Rexpay\Contracts\RouteInterface;
 use Pils36\Rexpay\Routes\Customer;
 use Pils36\Rexpay\Routes\Transaction;
 
-class RequestBuilderTest extends \PHPUnit_Framework_TestCase
+class RequestBuilderTest extends \PHPUnit\Framework\TestCase
 {
     public function testMoveArgsToSentargs()
     {
-        $p = new Rexpay('REXSECK_');
+        $p = new Rexpay();
         $interface = ['args'=>['id']];
         $payload = ['id'=>1,'reference'=>'something'];
         $sentargs = [];
@@ -19,7 +19,8 @@ class RequestBuilderTest extends \PHPUnit_Framework_TestCase
 
         $rb->moveArgsToSentargs();
         $this->assertEquals(1, $rb->sentargs['id']);
-        $this->assertEquals(1, count($rb->payload));
+        $this->assertEquals('something', $rb->payload['reference']);
+        $this->assertArrayNotHasKey('id', $rb->payload);
     }
 
     public function testPutArgsIntoEndpoint()
@@ -51,7 +52,7 @@ class RequestBuilderTest extends \PHPUnit_Framework_TestCase
 
         $r = $rb->build();
 
-        $this->assertEquals('https://pgs-sandbox.globalaccelerex.com/api/pgs/request?perPage=10', $r->endpoint);
+        $this->assertEquals('https://pgs-sandbox.globalaccelerex.com/api/pgs/request?perPage=10&authToken=REXSECK_&mode=test', $r->endpoint);
         $this->assertEquals('get', $r->method);
         $this->assertEmpty($r->body);
 

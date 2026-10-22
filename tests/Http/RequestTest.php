@@ -5,7 +5,7 @@ use Pils36\Rexpay\Http\Request;
 use Pils36\Rexpay\Http\Response;
 use Pils36\Rexpay;
 
-class RequestTest extends \PHPUnit_Framework_TestCase
+class RequestTest extends \PHPUnit\Framework\TestCase
 {
     public function testInitialize()
     {
